@@ -5,7 +5,8 @@ const HeroSection = () => {
     
     <div className=" mx-auto container   rounded-3xl shadow-sm border border-gray-100 overflow-hidden my-4 sm:my-10">
       
-    
+   
+   
       <div className="px-6 sm:px-12 py-12 lg:py-20 min-h-[80vh] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
         
         {/* Left Column: Text & CTA */}
