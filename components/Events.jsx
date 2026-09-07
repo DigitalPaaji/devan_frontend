@@ -101,7 +101,7 @@ const Events = () => {
 
           <div className="flex min-h-[260px] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-200 bg-white text-center">
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#153497]/10 text-[#153497]">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10 text-[#0D2B45]">
               <FiCalendar size={24} />
             </div>
 
@@ -135,7 +135,7 @@ const Events = () => {
 
             <div className="mb-2 flex items-center gap-2">
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
                 <FiCalendar size={15} />
               </span>
 
@@ -262,7 +262,7 @@ const EventCard = ({ event }) => {
     : "Date to be announced";
 
   return (
-    <article className="group h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-[#153497]/30 hover:shadow-xl">
+    <article className="group h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-[#0D2B45]/30 hover:shadow-xl">
 
       {/* ======================================================
           IMAGE
@@ -277,7 +277,7 @@ const EventCard = ({ event }) => {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center bg-[#153497]/5 text-[#153497]">
+          <div className="flex h-full items-center justify-center bg-[#0D2B45]/5 text-[#0D2B45]">
             <FiCalendar size={40} />
           </div>
         )}
@@ -286,7 +286,7 @@ const EventCard = ({ event }) => {
 
         <div className="absolute left-4 top-4 flex overflow-hidden rounded-xl bg-white shadow-lg">
 
-          <div className="flex w-12 flex-col items-center justify-center bg-[#153497] py-2 text-white">
+          <div className="flex w-12 flex-col items-center justify-center bg-[#0D2B45] py-2 text-white">
 
             <span className="text-lg font-bold leading-none">
               {formatDay}
@@ -344,7 +344,7 @@ const EventCard = ({ event }) => {
 
             <FiCalendar
               size={14}
-              className="shrink-0 text-[#153497]"
+              className="shrink-0 text-[#0D2B45]"
             />
 
             <span>
@@ -358,7 +358,7 @@ const EventCard = ({ event }) => {
 
               <FiClock
                 size={14}
-                className="shrink-0 text-[#153497]"
+                className="shrink-0 text-[#0D2B45]"
               />
 
               <span>
@@ -373,7 +373,7 @@ const EventCard = ({ event }) => {
 
               <FiMapPin
                 size={14}
-                className="shrink-0 text-[#153497]"
+                className="shrink-0 text-[#0D2B45]"
               />
 
               <span className="line-clamp-1">
@@ -397,7 +397,7 @@ const EventCard = ({ event }) => {
 
           <Link
             href={`/events/${event?.slug || event?._id}`}
-            className="group/read inline-flex items-center gap-1.5 rounded-xl bg-[#153497] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:bg-[#9676e8] hover:shadow-md"
+            className="group/read inline-flex items-center gap-1.5 rounded-xl bg-[#0D2B45] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:bg-[#9676e8] hover:shadow-md"
           >
             View Event
 

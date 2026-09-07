@@ -27,7 +27,7 @@ const AboutSterilizationChampions = () => {
 
             <div className="mb-3 flex items-center gap-2">
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
                 <FiShield size={16} />
               </span>
 
@@ -41,7 +41,7 @@ const AboutSterilizationChampions = () => {
 
             <h2 className="max-w-2xl text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               Empowering the Professionals
-              <span className="text-[#153497]">
+              <span className="text-[#0D2B45]">
                 {" "}Behind Safe Healthcare
               </span>
             </h2>
@@ -68,7 +68,7 @@ const AboutSterilizationChampions = () => {
 
             <a
               href="/about"
-              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#153497] px-5 py-3 text-xs font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9676e8] hover:shadow-lg"
+              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0D2B45] px-5 py-3 text-xs font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9676e8] hover:shadow-lg"
             >
               Learn More About Us
 
@@ -122,11 +122,11 @@ const AboutSterilizationChampions = () => {
             BOTTOM STATEMENT
         ==================================================== */}
 
-        <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#153497]/10 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#0D2B45]/10 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
 
           <div className="flex items-center gap-3">
 
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#153497]/10 text-[#153497]">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0D2B45]/10 text-[#0D2B45]">
               <FiShield size={18} />
             </div>
 
@@ -162,11 +162,11 @@ const AboutSterilizationChampions = () => {
 
 const ChampionFeature = ({ icon, number, title, text }) => {
   return (
-    <div className="group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#153497]/30 hover:shadow-lg">
+    <div className="group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#0D2B45]/30 hover:shadow-lg">
 
       <div className="flex items-start justify-between">
 
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#153497]/10 text-[#153497] transition-colors group-hover:bg-[#153497] group-hover:text-white">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0D2B45]/10 text-[#0D2B45] transition-colors group-hover:bg-[#0D2B45] group-hover:text-white">
           {icon}
         </div>
 

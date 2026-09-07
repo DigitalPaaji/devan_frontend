@@ -21,7 +21,7 @@ import {
   FiArrowUpRight,
 } from "react-icons/fi";
 
-const PRIMARY = "#153497";
+const PRIMARY = "#0D2B45";
 
 const NewsYt = () => {
   const [news, setNews] = useState([]);
@@ -175,14 +175,14 @@ const NewsYt = () => {
               <div className="hidden shrink-0 gap-2 sm:flex">
 
                 <button
-                  className="news-prev group flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition-all duration-300 hover:border-[#153497] hover:bg-[#153497] hover:text-white"
+                  className="news-prev group flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition-all duration-300 hover:border-[#0D2B45] hover:bg-[#0D2B45] hover:text-white"
                   aria-label="Previous news"
                 >
                   <FiArrowLeft className="text-lg transition-transform group-hover:-translate-x-0.5" />
                 </button>
 
                 <button
-                  className="news-next group flex h-11 w-11 items-center justify-center rounded-full bg-[#153497] text-white shadow-md shadow-[#153497]/20 transition-all duration-300 hover:scale-105"
+                  className="news-next group flex h-11 w-11 items-center justify-center rounded-full bg-[#0D2B45] text-white shadow-md shadow-[#0D2B45]/20 transition-all duration-300 hover:scale-105"
                   aria-label="Next news"
                 >
                   <FiArrowRight className="text-lg transition-transform group-hover:translate-x-0.5" />
@@ -268,7 +268,7 @@ const NewsYt = () => {
 
                         {/* Arrow */}
 
-                        <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#153497] opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
+                        <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0D2B45] opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
 
                           <FiArrowUpRight />
 
@@ -297,7 +297,7 @@ const NewsYt = () => {
 
                         {/* Title */}
 
-                        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-gray-900 transition-colors duration-300 group-hover:text-[#153497] sm:text-xl">
+                        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-gray-900 transition-colors duration-300 group-hover:text-[#0D2B45] sm:text-xl">
                           {item.title}
                         </h3>
 
@@ -409,14 +409,14 @@ const NewsYt = () => {
               <div className="hidden shrink-0 gap-2 sm:flex">
 
                 <button
-                  className="yt-prev group flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all hover:border-[#153497] hover:bg-[#153497] hover:text-white"
+                  className="yt-prev group flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 transition-all hover:border-[#0D2B45] hover:bg-[#0D2B45] hover:text-white"
                   aria-label="Previous video"
                 >
                   <FiArrowLeft />
                 </button>
 
                 <button
-                  className="yt-next group flex h-10 w-10 items-center justify-center rounded-full bg-[#153497] text-white shadow-md shadow-[#153497]/20 transition-all hover:scale-105"
+                  className="yt-next group flex h-10 w-10 items-center justify-center rounded-full bg-[#0D2B45] text-white shadow-md shadow-[#0D2B45]/20 transition-all hover:scale-105"
                   aria-label="Next video"
                 >
                   <FiArrowRight />
@@ -605,7 +605,7 @@ const NewsYt = () => {
           width: 7px;
           height: 7px;
           opacity: 0.25;
-          background: #153497;
+          background: #0D2B45;
           transition: all 0.3s ease;
         }
 
@@ -614,7 +614,7 @@ const NewsYt = () => {
           width: 24px;
           border-radius: 10px;
           opacity: 1;
-          background: #153497;
+          background: #0D2B45;
         }
 
       `}</style>

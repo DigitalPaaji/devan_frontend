@@ -94,7 +94,7 @@ const Articles = () => {
 
           <div className="flex min-h-[260px] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-200 bg-slate-50 text-center">
 
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#153497]/10 text-[#153497]">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10 text-[#0D2B45]">
               <FiBookOpen size={24} />
             </div>
 
@@ -131,7 +131,7 @@ const Articles = () => {
 
             <div className="mb-2 flex items-center gap-2">
 
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
                 <FiBookOpen size={15} />
               </span>
 
@@ -224,7 +224,7 @@ const Articles = () => {
 
 const ArticleCard = ({ article }) => {
   return (
-    <article className="group h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-[#153497]/30 hover:shadow-xl">
+    <article className="group h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-[#0D2B45]/30 hover:shadow-xl">
 
       {/* ======================================================
           THUMBNAIL
@@ -239,7 +239,7 @@ const ArticleCard = ({ article }) => {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-[#153497]">
+          <div className="flex h-full w-full items-center justify-center text-[#0D2B45]">
             <FiBookOpen size={35} />
           </div>
         )}
@@ -286,7 +286,7 @@ const ArticleCard = ({ article }) => {
 
           <div className="flex min-w-0 items-center gap-2.5">
 
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
               <FiUser size={14} />
             </div>
 

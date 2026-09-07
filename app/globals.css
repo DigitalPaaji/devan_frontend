@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,400;1,500&display=swap');@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&display=swap');
+
 @import "tailwindcss";
 
 
@@ -6,4 +8,125 @@
 }
 .bg-p{
   background: #07566F;
+}
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+
+
+@keyframes kenBurns {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.4); opacity: 0; }
+  70% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1); opacity: 0.35; }
+}
+
+.hero-rise {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(8px);
+  animation: heroRiseAnim 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes heroRiseAnim {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.nav-drop {
+  opacity: 0;
+  transform: translateY(-18px);
+  animation: navDropAnim 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+@keyframes navDropAnim {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arc-line {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  animation: arcLineAnim 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes arcLineAnim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.arc-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: popIn 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.arc-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulseRing 2.8s ease-in-out infinite;
+}
+
+.arc-text {
+  opacity: 0;
+  animation: fadeInAnim 0.7s ease forwards;
+}
+
+@keyframes fadeInAnim {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.2s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

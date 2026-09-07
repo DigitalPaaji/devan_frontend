@@ -11,7 +11,7 @@ import {
 
 const JobCard = ({ job }) => {
   return (
-    <div className="group h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#153497]/30 hover:shadow-xl sm:p-6">
+    <div className="group h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#0D2B45]/30 hover:shadow-xl sm:p-6">
 
       {/* =====================================================
           TOP
@@ -21,7 +21,7 @@ const JobCard = ({ job }) => {
 
         {/* Job Icon */}
 
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#153497]/10 text-[#153497] transition-all duration-300 group-hover:bg-[#153497] group-hover:text-white">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0D2B45]/10 text-[#0D2B45] transition-all duration-300 group-hover:bg-[#0D2B45] group-hover:text-white">
 
           <FiBriefcase size={21} />
 
@@ -41,7 +41,7 @@ const JobCard = ({ job }) => {
 
       <div className="mt-5">
 
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#153497]">
+        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#0D2B45]">
           {job?.category}
         </p>
 
@@ -105,7 +105,7 @@ const JobCard = ({ job }) => {
 
         <Link
           href={`/jobs/${job?.slug}`}
-          className="group/btn inline-flex items-center gap-2 rounded-xl bg-[#153497] px-4 py-2.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-[#9676e8] hover:shadow-md"
+          className="group/btn inline-flex items-center gap-2 rounded-xl bg-[#0D2B45] px-4 py-2.5 text-xs font-semibold text-white transition-all duration-300 hover:bg-[#9676e8] hover:shadow-md"
         >
           View Job
 

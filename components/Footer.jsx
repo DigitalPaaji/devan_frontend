@@ -18,7 +18,7 @@ import {
   FiPlayCircle,
 } from "react-icons/fi";
 
-const PRIMARY = "#153497";
+const PRIMARY = "#0D2B45";
 
 const Footer = () => {
   const scrollTop = () => {
@@ -268,7 +268,7 @@ const Footer = () => {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="group flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-blue-100/50 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-[#153497] hover:text-white"
+                    className="group flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-blue-100/50 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-[#0D2B45] hover:text-white"
                   >
                     <span className="transition-transform duration-300 group-hover:scale-110">
                       {social.icon}
@@ -368,7 +368,7 @@ const Footer = () => {
               >
                 Back to top
 
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-blue-400/30 group-hover:bg-[#153497]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-blue-400/30 group-hover:bg-[#0D2B45]">
                   <FiChevronUp className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                 </span>
               </button>
@@ -446,7 +446,7 @@ const FooterColumn = ({ title, links }) => {
               className="group flex items-center gap-2 text-sm text-blue-100/40 transition-all duration-300 hover:translate-x-1 hover:text-white"
             >
               <span className="relative flex w-3 items-center">
-                <span className="absolute h-1.5 w-1.5 rounded-full bg-[#153497] opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                <span className="absolute h-1.5 w-1.5 rounded-full bg-[#0D2B45] opacity-0 transition-all duration-300 group-hover:opacity-100" />
 
                 <span className="h-px w-0 bg-blue-400 transition-all duration-300 group-hover:w-3" />
               </span>

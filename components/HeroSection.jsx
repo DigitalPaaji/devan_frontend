@@ -13,7 +13,7 @@ const HeroSection = () => {
         <div className="flex flex-col gap-8 z-10">
           <h1 className="text-5xl font- sm:text-6xl lg:text-7xl font-bold text-gray-700 ">
             A new way to <br />
-            <span className="text-[#2b2492]">level up.</span>
+            <span className="text-[#100883]">level up.</span>
           </h1>
 
           <p className="text-gray-500 text-lg max-w-md leading-relaxed">
@@ -22,7 +22,7 @@ const HeroSection = () => {
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button className="bg-[#2b2492] hover:bg-[#153497] text-white font-medium rounded-full px-8 py-3 transition-colors">
+            <button className="bg-[#0D2B45] hover:bg-[#0D2B45] text-white font-medium rounded-full px-8 py-3 transition-colors">
               Join Us
             </button>
             <button className="border border-gray-300 text-gray-700 font-medium rounded-full px-8 py-3 hover:bg-gray-50 transition-colors">

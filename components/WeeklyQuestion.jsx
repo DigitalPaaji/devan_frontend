@@ -195,11 +195,11 @@ const WeeklyQuestion = () => {
 
         <div className="mb-2 flex items-center gap-2">
 
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497] text-white">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45] text-white">
             <FiHelpCircle size={16} />
           </span>
 
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#153497]">
+          <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#0D2B45]">
             Weekly Challenge
           </span>
 
@@ -229,7 +229,7 @@ const WeeklyQuestion = () => {
 
           {/* Accent */}
 
-          <div className="h-1 w-full bg-[#153497]" />
+          <div className="h-1 w-full bg-[#0D2B45]" />
 
           <div className="p-5 sm:p-6 lg:p-7">
 
@@ -252,12 +252,12 @@ const WeeklyQuestion = () => {
                         expert?.fullname ||
                         "Expert"
                       }
-                      className="h-14 w-14 rounded-2xl object-cover ring-4 ring-[#153497]/10"
+                      className="h-14 w-14 rounded-2xl object-cover ring-4 ring-[#0D2B45]/10"
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#153497]/10">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10">
                       <FiUser
-                        className="text-xl text-[#153497]"
+                        className="text-xl text-[#0D2B45]"
                       />
                     </div>
                   )}
@@ -333,9 +333,9 @@ const WeeklyQuestion = () => {
 
               ) : (
 
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#153497]/10 px-3 py-1.5 text-xs font-semibold text-[#153497]">
+                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#0D2B45]/10 px-3 py-1.5 text-xs font-semibold text-[#0D2B45]">
 
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#153497]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#0D2B45]" />
 
                   Active
 
@@ -355,7 +355,7 @@ const WeeklyQuestion = () => {
 
             <div>
 
-              <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#153497]">
+              <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#0D2B45]">
 
                 <FiHelpCircle size={13} />
 
@@ -378,7 +378,7 @@ const WeeklyQuestion = () => {
               <Link
                 href={`${img_url}${question.referenceImages}`}
                 target="_blank"
-                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[#153497]/20 bg-[#153497]/5 px-3 py-2 text-xs font-semibold text-[#8b6dd9] transition hover:bg-[#153497]/10"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[#0D2B45]/20 bg-[#0D2B45]/5 px-3 py-2 text-xs font-semibold text-[#8b6dd9] transition hover:bg-[#0D2B45]/10"
               >
 
                 <FiExternalLink size={14} />
@@ -399,7 +399,7 @@ const WeeklyQuestion = () => {
 
               <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 p-3">
 
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#153497] shadow-sm">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#0D2B45] shadow-sm">
 
                   <FiCalendar size={16} />
 
@@ -423,7 +423,7 @@ const WeeklyQuestion = () => {
 
               <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 p-3">
 
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#153497] shadow-sm">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#0D2B45] shadow-sm">
 
                   <FiClock size={16} />
 
@@ -464,7 +464,7 @@ const WeeklyQuestion = () => {
 
                   <div className="flex items-center gap-2">
 
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
 
                       <FiClock size={14} />
 
@@ -511,7 +511,7 @@ const WeeklyQuestion = () => {
                           :
                         </span>
 
-                        <span className="text-[#153497]">
+                        <span className="text-[#0D2B45]">
                           {String(
                             timeLeft.seconds
                           ).padStart(2, "0")}
@@ -533,7 +533,7 @@ const WeeklyQuestion = () => {
 
                 <Link
                   href={`/weekly-question/${question._id}`}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#153497] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9676e8] hover:shadow-md sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0D2B45] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9676e8] hover:shadow-md sm:w-auto"
                 >
 
                   Submit Your Answer
@@ -576,7 +576,7 @@ const WeeklyQuestion = () => {
             CHAMPION CARD
         ==================================================== */}
 
-        <div className="relative overflow-hidden rounded-3xl bg-[#153497] text-white shadow-sm">
+        <div className="relative overflow-hidden rounded-3xl bg-[#0D2B45] text-white shadow-sm">
 
           {/* Decorative circles */}
 
@@ -616,7 +616,7 @@ const WeeklyQuestion = () => {
 
               <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white/10">
 
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#153497] shadow-lg">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0D2B45] shadow-lg">
 
                   <FiAward className="text-2xl" />
 

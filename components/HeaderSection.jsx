@@ -22,7 +22,7 @@ import {
 } from "react-icons/fi";
 import { FaNewspaper } from "react-icons/fa";
 
-const PRIMARY = "#153497";
+const PRIMARY = "#0D2B45";
 
 const HeaderSection = () => {
   const pathname = usePathname();
@@ -182,7 +182,7 @@ const HeaderSection = () => {
                       active
                         ? "text-white"
                         
-                        : "text-slate-600 hover:text-[#153497]"
+                        : "text-slate-600 hover:text-[#0D2B45]"
                     }`}
                   >
                     {active && (
@@ -210,7 +210,7 @@ const HeaderSection = () => {
               <div className="group relative">
                 <button
                   className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300
-                text-slate-600 hover:text-[#153497]
+                text-slate-600 hover:text-[#0D2B45]
                   `}
                 >
                   <FiBookOpen />
@@ -263,14 +263,14 @@ const HeaderSection = () => {
 
               <Link
                 href="/about"
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 text-slate-600 hover:text-[#153497]`}
+                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 text-slate-600 hover:text-[#0D2B45]`}
               >
                 About
               </Link>
 
               <Link
                 href="/contact"
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300  text-slate-600 hover:text-[#153497]`}
+                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300  text-slate-600 hover:text-[#0D2B45]`}
               >
                 Contact
               </Link>

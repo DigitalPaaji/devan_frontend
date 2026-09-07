@@ -18,7 +18,7 @@ const FounderMessage = () => {
         <div className="mb-7">
 
           <div className="mb-2 flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#153497]/10 text-[#153497]">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
               <BsFillChatQuoteFill size={15} />
             </span>
 
@@ -29,7 +29,7 @@ const FounderMessage = () => {
 
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             Empowering the Professionals
-            <span className="text-[#153497]"> Behind Sterile Care</span>
+            <span className="text-[#0D2B45]"> Behind Sterile Care</span>
           </h2>
 
         </div>
@@ -54,7 +54,7 @@ const FounderMessage = () => {
 
               <div className="flex items-center gap-2">
 
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#153497] text-white">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#0D2B45] text-white">
                   <FiCheckCircle size={11} />
                 </span>
 
@@ -80,7 +80,7 @@ const FounderMessage = () => {
           <div className="relative flex flex-col justify-center p-6 sm:p-8 md:col-span-3 lg:p-10">
 
             {/* Quote */}
-            <div className="absolute right-6 top-6 text-[#153497]/15">
+            <div className="absolute right-6 top-6 text-[#0D2B45]/15">
               <BsFillChatQuoteFill size={35} />
             </div>
 
@@ -165,7 +165,7 @@ const Feature = ({ icon, title, text }) => {
 
       <div className="flex items-center gap-2">
 
-        <span className="text-[#153497]">
+        <span className="text-[#0D2B45]">
           {icon}
         </span>
 

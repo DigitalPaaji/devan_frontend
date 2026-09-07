@@ -117,7 +117,7 @@ const JobSection = () => {
 
           <div className="flex min-h-[280px] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-200 bg-white px-6 text-center">
 
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#153497]/10 text-[#153497]">
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10 text-[#0D2B45]">
 
               <FiBriefcase size={24} />
 
@@ -159,7 +159,7 @@ const JobSection = () => {
 
             <div className="mb-3 flex items-center gap-2">
 
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#153497]/10 text-[#153497]">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0D2B45]/10 text-[#0D2B45]">
 
                 <FiBriefcase size={17} />
 
@@ -171,8 +171,8 @@ const JobSection = () => {
 
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Join Our Team
+            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+              Find Job
             </h2>
 
             <p className="mt-2 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">

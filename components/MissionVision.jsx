@@ -1,262 +1,175 @@
-"use client";
+import Image from "next/image";
+import { BiAward, BiShield } from "react-icons/bi";
+import { BsEye } from "react-icons/bs";
+import { FaHandshake } from "react-icons/fa";
+import { GiCrowNest } from "react-icons/gi";
+// import { Shield, Award, Eye, Handshake, Crown } from "lucide-react";
 
-import React from "react";
-import {
-  FiArrowUpRight,
-  FiHeart,
-  FiTarget,
-  FiEye,
-  FiCheckCircle,
-} from "react-icons/fi";
+export default function PhilosophyAndMission() {
+  const philosophyPoints = [
+    {
+      icon: BiShield,
+      image: "/sustainability.png",
+      title: "DEDICATION",
+      description: "Committed to every detail for absolute safety and compliance.",
+      color: "text-[#0D2B45]",
+      bgColor: "bg-[#0D2B45]/10"
+    },
+    {
+      icon: BiAward,
+      image: "/premium.png", 
+      title: "EXCELLENCE",
+      description: "Delivering the highest standards always, through stability and microbiological analysis.",
+      color: "text-[#0D2B45]",
+      bgColor: "bg-[#0D2B45]/10"
+    },
+    {
+      icon: BsEye,
+      image: "/ele6.png", 
+      title: "VIGILANCE",
+      description: "Alert, observant and proactive in all manufacturing processes.",
+      color: "text-[#0D2B45]",
+      bgColor: "bg-[#0D2B45]/10"
+    },
+    {
+      icon: FaHandshake,
+      image: "/sustainability.png", 
+      title: "ASSURANCE",
+      description: "Ensuring trust through consistency, transparency, and quality.",
+      color: "text-[#0D2B45]",
+      bgColor: "bg-[#0D2B45]/10"
+    },
+    {
+      icon: GiCrowNest,
+      image: "/premium.png", 
+      title: "NOBILITY",
+      description: "Upholding dignity and excellence across every single formulation.",
+      color: "text-[#0D2B45]",
+      bgColor: "bg-[#0D2B45]/10"
+    }
+  ];
 
-const MissionVision = () => {
+  const missionPoints = [
+    {
+      number: "01",
+      title: "Our Vision",
+      description:
+"To create a professional ecosystem where sterilization professionals can continuously learn, share knowledge, participate in meaningful activities and grow together."
+    },
+    {
+      number: "02",
+      title: "Our Mission",
+      description:
+        "To become India's largest learning and professional networking platform for sterilization professionals, and eventually build a connected CSSD community worldwide."
+    }
+  ];
+
   return (
-    <section className="w-full bg-white py-14 sm:py-20 lg:py-24">
-      <div className="container mx-auto px-4">
-
-
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
-
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[#153497]/10 px-4 py-2 text-xs font-semibold text-[#8c70d8]">
-            <FiHeart size={14} />
-            Our Purpose
-          </div>
-
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-            Mission & Vision
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
-            We are committed to creating a healthier future through
-            compassionate care, medical excellence, and continuous
-            innovation.
-          </p>
-
-        </div>
-
-        {/* =====================================================
-            CARDS
-        ===================================================== */}
-
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-
-          {/* ===================================================
-              MISSION
-          =================================================== */}
-
-          <div className="group relative overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:p-8 lg:p-10">
-
-            {/* Background decoration */}
-
-            <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#153497]/5 transition-transform duration-700 group-hover:scale-150" />
-
-            <div className="absolute bottom-0 right-0 h-32 w-32 rounded-full bg-[#153497]/5 blur-2xl" />
-
-            <div className="relative">
-
-              {/* Icon + Label */}
-
-              <div className="flex items-center justify-between">
-
-                <div className="flex items-center gap-3">
-
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#153497]/10 text-[#153497] transition-transform duration-500 group-hover:scale-110">
-
-                    <FiTarget size={22} />
-
-                  </div>
-
-                  <div>
-
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#153497]">
-                      What drives us
-                    </p>
-
-                    <h3 className="mt-0.5 text-xl font-bold text-slate-900">
-                      Our Mission
-                    </h3>
-
-                  </div>
-
-                </div>
-
-                <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition-all duration-300 group-hover:border-[#153497]/30 group-hover:bg-[#153497]/10 group-hover:text-[#153497] sm:flex">
-
-                  <FiArrowUpRight />
-
-                </div>
-
-              </div>
-
-              {/* Content */}
-
-              <p className="mt-7 text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
-                To provide accessible, compassionate, and
-                patient-centered healthcare while maintaining the
-                highest standards of clinical excellence and
-                professional integrity.
-              </p>
-
-              {/* Points */}
-
-              <div className="mt-7 space-y-3 border-t border-slate-100 pt-6">
-
-                <MissionPoint>
-                  Compassionate patient care
-                </MissionPoint>
-
-                <MissionPoint>
-                  Excellence in medical services
-                </MissionPoint>
-
-                <MissionPoint>
-                  Accessible healthcare for everyone
-                </MissionPoint>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* ===================================================
-              VISION
-          =================================================== */}
-
-          <div className="group relative overflow-hidden rounded-[28px] bg-[#153497] p-6 text-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:p-8 lg:p-10">
-
-            {/* Background decoration */}
-
-            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border border-white/10 transition-transform duration-700 group-hover:scale-125" />
-
-            <div className="absolute -bottom-24 -left-16 h-48 w-48 rounded-full border border-white/10" />
-
-            <div className="absolute right-10 top-1/2 h-24 w-24 -translate-y-1/2 rounded-full bg-white/10 blur-3xl" />
-
-            <div className="relative">
-
-              {/* Icon + Label */}
-
-              <div className="flex items-center justify-between">
-
-                <div className="flex items-center gap-3">
-
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white transition-transform duration-500 group-hover:scale-110">
-
-                    <FiEye size={22} />
-
-                  </div>
-
-                  <div>
-
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
-                      Where we're going
-                    </p>
-
-                    <h3 className="mt-0.5 text-xl font-bold">
-                      Our Vision
-                    </h3>
-
-                  </div>
-
-                </div>
-
-                <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/60 transition-all duration-300 group-hover:bg-white/10 group-hover:text-white sm:flex">
-
-                  <FiArrowUpRight />
-
-                </div>
-
-              </div>
-
-              {/* Content */}
-
-              <p className="mt-7 text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
-                To become a trusted leader in healthcare by combining
-                advanced medical technology, skilled professionals,
-                and a human-centered approach to improve lives and
-                build healthier communities.
-              </p>
-
-              {/* Points */}
-
-              <div className="mt-7 space-y-3 border-t border-white/15 pt-6">
-
-                <VisionPoint>
-                  Innovation in healthcare
-                </VisionPoint>
-
-                <VisionPoint>
-                  Better outcomes for every patient
-                </VisionPoint>
-
-                <VisionPoint>
-                  A healthier and stronger community
-                </VisionPoint>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* =====================================================
-            BOTTOM STATEMENT
-        ===================================================== */}
-
-        <div className="mx-auto mt-8 max-w-3xl text-center">
-
-          <p className="text-sm font-medium text-slate-400">
-            Caring today. Innovating tomorrow.{" "}
-            <span className="text-[#153497]">
-              Transforming lives together.
+    <div className="text-[#0D2B45]">
+      {/* Philosophy Section */}
+      {/* <section className="px-4 sm:px-6 lg:px-16 xl:px-24 2xl:px-52 py-16 lg:py-24 overflow-hidden">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#0D2B45] bg-[#0D2B45]/20 px-4 py-2 rounded-full mb-4">
+          BUILT FOR CSSD PROFESSIONALS
             </span>
-          </p>
+            
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-light  text-[#0D2B45]">
+             A Stronger  <span className="relative italic font-medium text-[#0D2B45]">CSSD </span>Community.
+            </h2>
+            
+            <p className="text-[#0D2B45]/70 mt-4 max-w-2xl mx-auto">
+DEVAN is a learning and professional networking platform created for sterilization professionals to learn, participate, connect and grow throughout their careers.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 justify-center">
+            {philosophyPoints.map((point, index) => {
+              const Icon = point.icon;
+              return (
+                <div 
+                  key={index} 
+                  className="relative text-center p-8 border border-[#A7ADB3]/40 hover:border-[#0D2B45] transition-all duration-500 group bg-white hover:-translate-y-2 shadow-sm rounded-2xl"
+                >
+                  <div className="relative mb-6">
+                    <div className={`absolute inset-0 ${point.bgColor} rounded-full blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
+                    <div className="relative w-20 h-20 mx-auto rounded-full bg-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-all duration-500 overflow-hidden border-2 border-[#A7ADB3]/20 group-hover:border-[#0D2B45]/30">
+                      <Image
+                        src={point.image}
+                        alt={point.title}
+                        width={50}
+                        height={50}
+                        className="object-contain w-10 h-10 group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl font-medium mb-3 text-[#0D2B45] group-hover:text-[#0D2B45] transition-colors duration-300">
+                    {point.title}
+                  </h3>
+                  
+                  <p className="text-[#0D2B45]/70 leading-relaxed text-sm px-4">
+                    {point.description}
+                  </p>
+                  
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#0D2B45] group-hover:w-16 transition-all duration-500" />
+                  
+                  <div className="absolute -bottom-4 -right-4 opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none">
+                    <Icon className="w-32 h-32 text-[#0D2B45]" />
+                  </div>
 
+                  <div className="absolute top-0 left-0 w-0 h-0 border-t-2 border-l-2 border-transparent group-hover:border-[#0D2B45] transition-all duration-500 rounded-tl-2xl" />
+                  <div className="absolute bottom-0 right-0 w-0 h-0 border-b-2 border-r-2 border-transparent group-hover:border-[#0D2B45] transition-all duration-500 rounded-br-2xl" />
+                </div>
+              );
+            })}
+          </div>
         </div>
+      </section> */}
 
-      </div>
-    </section>
-  );
-};
+      {/* Mission & Vision Section */}
+      <section className="bg-white">
 
-
-
-const MissionPoint = ({ children }) => {
-  return (
-    <div className="flex items-center gap-3">
-
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#153497]/10 text-[#153497]">
-        <FiCheckCircle size={13} />
-      </span>
-
-      <span className="text-sm font-medium text-slate-600">
-        {children}
-      </span>
-
+        
+        <div className="px-4 sm:px-6 lg:px-16 xl:px-24 2xl:px-52 py-16 lg:py-24">
+          {/* Title area */}
+          <div className="max-w-3xl mb-16">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-sm font-mono text-[#A7ADB3]">—</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#0D2B45] pb-2">Core Philosophy</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-medium mb-4 text-[#0D2B45]">
+            OUR PURPOSE
+            </h2>
+            <p className="text-lg capitalize text-[#0D2B45]/70 italic font-light border-l-4 border-[#0D2B45] pl-6">
+        Advancing CSSD Through Knowledge & Community.
+            </p>
+          </div>
+          
+          {/* Mission grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-28">
+            {missionPoints.map((point, index) => (
+              <div 
+                key={index}
+                className="group relative p-6"
+              >
+                {/* Number indicator */}
+                <div className="text-6xl font-bold mb-4 text-[#A7ADB3]/40 group-hover:text-[#0D2B45]/40 transition-colors">
+                  {point.number}
+                </div>
+                
+                {/* Content */}
+                <h3 className="text-xl font-semibold text-[#0D2B45] mb-3 group-hover:text-[#0D2B45] transition-colors">
+                  {point.title}
+                </h3>
+                <p className="text-[#0D2B45]/70 leading-relaxed text-sm">
+                  {point.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
-};
-
-
-
-const VisionPoint = ({ children }) => {
-  return (
-    <div className="flex items-center gap-3">
-
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/15 text-white">
-        <FiCheckCircle size={13} />
-      </span>
-
-      <span className="text-sm font-medium text-white/80">
-        {children}
-      </span>
-
-    </div>
-  );
-};
-
-export default MissionVision;
-
+}
