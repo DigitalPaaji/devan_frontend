@@ -42,7 +42,7 @@ const FounderMessage = () => {
 
             <img
               src="/Images/founder.jpeg"
-              alt="Dr. Jaspaal Singh"
+              alt="Dr. Jaswant singh bodhy"
               className="absolute inset-0 h-full w-full object-cover object-top"
             />
 
@@ -65,7 +65,7 @@ const FounderMessage = () => {
               </div>
 
               <h3 className="mt-2 text-xl font-bold text-white">
-                Dr. Jaspaal Singh
+                Dr. jaswant singh bodhy
               </h3>
 
               <p className="text-xs text-white/60">
@@ -137,7 +137,7 @@ const FounderMessage = () => {
             <div className="mt-5 border-t border-slate-100 pt-4">
 
               <p className="font-serif text-xl italic text-slate-800">
-                Jaspaal Singh
+                jaswant singh bodhy
               </p>
 
               <p className="text-[9px] font-semibold uppercase tracking-wider text-slate-400">
