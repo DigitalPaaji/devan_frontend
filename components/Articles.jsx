@@ -5,41 +5,65 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { base_url, img_url } from "./utils";
 
-import {
-  FiArrowUpRight,
-  FiBookOpen,
-  FiUser,
-  FiChevronRight,
-} from "react-icons/fi";
+import { FiArrowUpRight, FiBookOpen, FiUser } from "react-icons/fi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import Link from "next/link";
+import ArticleCard from "./ArticleCard";
+
+/* =========================================================
+   FONTS + BASE STYLES (inject once)
+   Serif for editorial voice, sans for interface text.
+========================================================= */
+const ArticleStyles = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap");
+
+    .articles-serif {
+      font-family: "Source Serif 4", Georgia, serif;
+    }
+    .articles-sans {
+      font-family: "Inter", -apple-system, sans-serif;
+    }
+
+    @keyframes articlesFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .articles-fade-in {
+      animation: articlesFadeIn 0.6s ease-out both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .articles-fade-in {
+        animation: none;
+      }
+    }
+  `}</style>
+);
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* ==========================================================
-     FETCH ARTICLES
-  ========================================================== */
-
   const fetchArticles = async () => {
     try {
       setLoading(true);
-
       const response = await axios.get(
         `${base_url}/learning/article/homepage`
       );
-
       const data = response.data;
-
-
-
       if (data.success) {
-       setArticles(data.article)
+        setArticles(data.article);
       } else {
         setArticles([]);
       }
@@ -58,26 +82,23 @@ const Articles = () => {
   /* ==========================================================
      LOADING
   ========================================================== */
-
   if (loading) {
     return (
-      <section className="w-full bg-white py-12 sm:py-16">
+      <section className="w-full bg-[#F7F5F0] py-16 sm:py-20">
+        <ArticleStyles />
         <div className="container mx-auto px-4">
-
-          <div className="mb-7">
-            <div className="h-4 w-32 animate-pulse rounded bg-slate-200" />
-            <div className="mt-3 h-8 w-64 animate-pulse rounded bg-slate-200" />
+          <div className="mb-10 max-w-md">
+            <div className="h-8 w-56 animate-pulse rounded-sm bg-[#e7e3d8]" />
+            <div className="mt-3 h-4 w-72 animate-pulse rounded-sm bg-[#e7e3d8]" />
           </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((item) => (
               <div
                 key={item}
-                className="h-[360px] animate-pulse rounded-3xl bg-slate-100"
+                className="h-[380px] animate-pulse rounded-sm bg-[#eeece4]"
               />
             ))}
           </div>
-
         </div>
       </section>
     );
@@ -86,250 +107,92 @@ const Articles = () => {
   /* ==========================================================
      EMPTY
   ========================================================== */
-
   if (!articles.length) {
     return (
-      <section className="w-full bg-white py-12 sm:py-16">
+      <section className="w-full bg-[#F7F5F0] py-16 sm:py-20">
+        <ArticleStyles />
         <div className="container mx-auto px-4">
-
-          <div className="flex min-h-[260px] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-200 bg-slate-50 text-center">
-
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10 text-[#0D2B45]">
-              <FiBookOpen size={24} />
-            </div>
-
-            <h3 className="mt-4 text-xl font-bold text-slate-800">
-              No Articles Available
+          <div className="flex min-h-[240px] flex-col items-center justify-center border border-[#DEDACE] text-center">
+            <FiBookOpen size={26} className="text-[#2F6F5C]" />
+            <h3 className="articles-serif mt-4 text-xl text-[#1A2420]">
+              No articles yet
             </h3>
-
-            <p className="mt-2 text-sm text-slate-500">
-              New learning resources will be available soon.
+            <p className="articles-sans mt-2 text-sm text-[#6B7570]">
+              New reading for your practice will appear here soon.
             </p>
-
           </div>
-
         </div>
       </section>
     );
   }
 
   /* ==========================================================
-     MAIN UI
+     MAIN
   ========================================================== */
-
   return (
-    <section className="w-full bg-white py-12 sm:py-16">
+    <section className="w-full bg-[#F7F5F0] py-16 sm:py-24">
+      <ArticleStyles />
+
       <div className="container mx-auto px-4">
-
-        {/* ====================================================
-            HEADER
-        ==================================================== */}
-
-        <div className="mb-7 flex items-end justify-between gap-4">
-
-          <div>
-
-            <div className="mb-2 flex items-center gap-2">
-
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
-                <FiBookOpen size={15} />
-              </span>
-
-              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#100da3]">
-                Learning & Knowledge
-              </span>
-
-            </div>
-
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-              Latest Articles
+        {/* ---------------- HEADER ---------------- */}
+        <div className="mb-10 flex flex-col gap-6 border-b border-[#DEDACE] pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl">
+            <h2 className="articles-serif text-3xl leading-tight text-[#1A2420] sm:text-4xl">
+              Latest from the clinic
             </h2>
-
-            <p className="mt-2 max-w-xl text-sm text-slate-500">
-              Learn from practical insights, expert knowledge,
-              and resources for healthcare professionals.
+            <p className="articles-sans mt-3 text-[15px] leading-relaxed text-[#6B7570]">
+              Practical insight and expert knowledge, written for
+              healthcare professionals who don't have time to waste.
             </p>
-
           </div>
-
-          {/* View All */}
 
           <Link
             href="/articles"
-            className="group hidden shrink-0 items-center gap-1.5 text-xs font-semibold text-[#100da3] sm:flex"
+            className="articles-sans group inline-flex shrink-0 items-center gap-1.5 border-b border-[#1A2420] pb-0.5 text-sm font-medium text-[#1A2420] transition-colors hover:border-[#2F6F5C] hover:text-[#2F6F5C]"
           >
-            View All
-
-            <FiChevronRight
-              size={15}
-              className="transition-transform group-hover:translate-x-1"
+            Browse all articles
+            <FiArrowUpRight
+              size={14}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </Link>
-
         </div>
 
-      <div className="overflow-hidden">
-        <Swiper
-          modules={[Autoplay]}
-          loop={articles.length > 3}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          speed={700}
-          spaceBetween={18}
-          slidesPerView={1}
-          breakpoints={{
-            640: {
-              slidesPerView: 1.5,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-          }}
-          className=""
-        >
-
-          {articles.map((article) => (
-
-            <SwiperSlide
-              key={article._id}
-              className=""
-            >
-
-              <ArticleCard article={article} />
-
-            </SwiperSlide>
-
-          ))}
-
-        </Swiper>
-</div>
-        {/* Mobile View All */}
-
-
-
+        {/* ---------------- SWIPER ---------------- */}
+        <div className="overflow-hidden pb-2">
+          <Swiper
+            modules={[Autoplay]}
+            loop={articles.length > 3}
+            autoplay={{
+              delay: 4200,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={650}
+            spaceBetween={28}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 1.4 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            {articles.map((article, i) => (
+              <SwiperSlide key={article._id}>
+                <div
+                  className="articles-fade-in"
+                  style={{ animationDelay: `${i * 70}ms` }}
+                >
+                  <ArticleCard article={article} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );
 };
 
-/* =============================================================
-   ARTICLE CARD
-============================================================= */
-
-const ArticleCard = ({ article }) => {
-  return (
-    <article className="group h-full overflow-hidden rounded-[24px] border border-slate-200 bg-white transition-all duration-500 hover:-translate-y-1 hover:border-[#0D2B45]/30 hover:shadow-xl">
-
-      {/* ======================================================
-          THUMBNAIL
-      ====================================================== */}
-
-      <div className="relative h-[190px] overflow-hidden bg-slate-100">
-
-        {article?.thumbnail ? (
-          <img
-            src={`${img_url}${article.thumbnail}`}
-            alt={article?.title || "Article"}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-[#0D2B45]">
-            <FiBookOpen size={35} />
-          </div>
-        )}
-
-        {/* Category */}
-
-        <div className="absolute left-4 top-4">
-
-          <span className="rounded-full bg-white/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-[#100da3] shadow-sm backdrop-blur-sm">
-            {article?.category}
-          </span>
-
-        </div>
-
-        {/* Arrow */}
-
-        <div className="absolute bottom-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-800 opacity-0 shadow-md transition-all duration-300 group-hover:opacity-100">
-          <FiArrowUpRight size={16} />
-        </div>
-
-      </div>
-
-      {/* ======================================================
-          CONTENT
-      ====================================================== */}
-
-      <div className="flex flex-col p-5">
-
-        <h3 className="line-clamp-2 min-h-[52px] text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-[#100da3]">
-          {article?.title}
-        </h3>
-
-        {article?.shortDescription && (
-          <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">
-            {article.shortDescription}
-          </p>
-        )}
-
-        {/* ==================================================
-            AUTHOR
-        ================================================== */}
-
-        <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-
-          <div className="flex min-w-0 items-center gap-2.5">
-
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
-              <FiUser size={14} />
-            </div>
-
-            <div className="min-w-0">
-
-              <p className="text-[9px] text-slate-400">
-                Written by
-              </p>
-
-              <p className="truncate text-xs font-semibold text-slate-700">
-                {article?.expertId?.fullname || "Expert"}
-              </p>
-
-            </div>
-
-          </div>
-
-          {/* */}
-
-          <Link
-            href={`/articles/${article?.slug}`}
-            className="group/read inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#100da3]"
-          >
-            Read
-
-            <FiArrowUpRight
-              size={14}
-              className="transition-transform group-hover/read:translate-x-0.5 group-hover/read:-translate-y-0.5"
-            />
-
-          </Link>
-
-        </div>
-
-      </div>
-
-    </article>
-  );
-};
 
 export default Articles;
-
-
-
-
-

@@ -1,32 +1,75 @@
+"use client"
+import Link from 'next/link';
 import React from 'react';
 import { BsArrowRight, BsArrowRightCircle } from 'react-icons/bs';
-
+import { FiArrowUpRight } from 'react-icons/fi';
+const AboutStyles = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap");
+ 
+    .about-serif {
+      font-family: "Source Serif 4", Georgia, serif;
+    }
+    .about-sans {
+      font-family: "Inter", -apple-system, sans-serif;
+    }
+ 
+    @keyframes aboutFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .about-fade-in {
+      animation: aboutFadeIn 0.6s ease-out both;
+    }
+ 
+    @media (prefers-reduced-motion: reduce) {
+      .about-fade-in {
+        animation: none;
+      }
+    }
+  `}</style>
+);
 export default function AboutSection() {
   return (
     <section
       id="about" 
-      className= "container mx-auto bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 overflow-hidden"
+      className= "container mx-auto bg-white py-10 md:py-12 lg:py-16 overflow-hidden"
     >
+      <AboutStyles />
       <div className="">
 
-        {/* Badge Row */}
-        <div className="px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8">
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#0D2B45] text-white flex items-center justify-center text-[11px] sm:text-[12px] font-semibold">
-            1
-          </div>
-
-          <div className="text-[12px] sm:text-[13px] font-medium border border-[#0D2B45]/20 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 text-[#0D2B45]">
-            About Sterilization Champions
-          </div>
-        </div>
+      
 
         {/* Heading */}
-        <div className="px-5 sm:px-8 lg:px-12 mb-12 sm:mb-16 lg:mb-28">
-          <h2 className="text-[clamp(1.5rem,4vw,3.2rem)] font-medium leading-[1.12] tracking-[-0.02em] text-[#0D2B45]">
-            Empowering sterilization professionals to
-            <br className="hidden sm:block" />
-            learn, grow, connect and lead.
-          </h2>
+      <div className="mb-10 flex flex-col gap-6 border-b border-[#DEDACE] pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl">
+            <h2 className="about-serif text-3xl leading-tight text-[#1A2420] sm:text-4xl">
+              Empowering sterilization professionals to learn, grow, connect
+              and lead.
+            </h2>
+            <p className="about-sans mt-3 text-[15px] leading-relaxed text-[#6B7570]">
+              Sterilization Champions is a professional learning and
+              networking platform built to bring the CSSD community together
+              through continuous education, recognition and shared knowledge.
+            </p>
+          </div>
+
+          <Link
+            href="#connect"
+            className="about-sans group inline-flex shrink-0 items-center gap-1.5 border-b border-[#1A2420] pb-0.5 text-sm font-medium text-[#1A2420] transition-colors hover:border-[#2F6F5C] hover:text-[#2F6F5C]"
+          >
+            Explore the community
+            <FiArrowUpRight
+              size={14}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
         </div>
 
         {/* Mobile / Tablet */}

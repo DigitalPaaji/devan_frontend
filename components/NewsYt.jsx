@@ -20,6 +20,7 @@ import {
   FiUser,
   FiArrowUpRight,
 } from "react-icons/fi";
+import Newscard from "./Newscard";
 
 const PRIMARY = "#0D2B45";
 
@@ -235,102 +236,7 @@ const NewsYt = () => {
 
                   <SwiperSlide key={item._id}>
 
-                    <article className="group h-full overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-[0_8px_35px_rgba(21,52,151,0.07)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_45px_rgba(21,52,151,0.14)]">
-
-                      {/* Image */}
-
-                      <div className="relative aspect-[16/10] overflow-hidden">
-
-                        <img
-                          src={`${img_url}${item.featuredImage}`}
-                          alt={item.title}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-
-                        {/* Gradient */}
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70" />
-
-                        {/* Category */}
-
-                        <div className="absolute left-4 top-4">
-
-                          <span
-                            className="rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg backdrop-blur-md"
-                            style={{
-                              backgroundColor: `${PRIMARY}e6`,
-                            }}
-                          >
-                            {item.category}
-                          </span>
-
-                        </div>
-
-                        {/* Arrow */}
-
-                        <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0D2B45] opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
-
-                          <FiArrowUpRight />
-
-                        </div>
-
-                      </div>
-
-                      {/* Content */}
-
-                      <div className="p-5 sm:p-6">
-
-                        {/* Date */}
-
-                        <div className="mb-3 flex items-center gap-2 text-xs font-medium text-gray-400">
-
-                          <FiCalendar
-                            style={{ color: PRIMARY }}
-                            className="text-sm"
-                          />
-
-                          <span>
-                            {formatDate(item.publicationDate)}
-                          </span>
-
-                        </div>
-
-                        {/* Title */}
-
-                        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-gray-900 transition-colors duration-300 group-hover:text-[#0D2B45] sm:text-xl">
-                          {item.title}
-                        </h3>
-
-                        {/* Expert */}
-
-                        <div className="mt-5 flex items-center gap-3 border-t border-gray-100 pt-4">
-
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white"
-                            style={{
-                              backgroundColor: PRIMARY,
-                            }}
-                          >
-                            <FiUser className="text-sm" />
-                          </div>
-
-                          <div className="min-w-0">
-
-                            <p className="truncate text-sm font-semibold text-gray-800">
-                              {item.expertId?.fullname || "Expert"}
-                            </p>
-
-                            <p className="truncate text-xs text-gray-400">
-                              {item.expertId?.designation || "Medical Expert"}
-                            </p>
-
-                          </div>
-
-                        </div>
-
-                      </div>
-
-                    </article>
+                 <Newscard news={item}/>
 
                   </SwiperSlide>
 

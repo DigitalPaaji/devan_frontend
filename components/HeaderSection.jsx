@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-
   FiX,
   FiChevronDown,
   FiArrowRight,
@@ -14,40 +13,28 @@ import {
   FiBookOpen,
   FiPlayCircle,
   FiHelpCircle,
- 
   FiMail,
   FiLogIn,
-  FiUserPlus,
   FiMenu,
 } from "react-icons/fi";
 import { FaNewspaper } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./store/userSlice";
+import { AiFillProfile } from "react-icons/ai";
 
 const PRIMARY = "#0D2B45";
 
 const HeaderSection = () => {
   const pathname = usePathname();
-
+   const dispatch = useDispatch()
   const [mobileOpen, setMobileOpen] = useState(false);
   const [learningOpen, setLearningOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const user = useSelector(state=>state.user)
 
-  /* ----------------------------------------------------------
-     Scroll effect
-  ---------------------------------------------------------- */
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  /* ----------------------------------------------------------
-     Close mobile menu when route changes
-  ---------------------------------------------------------- */
+     
+useEffect(()=>{
+dispatch(getUser())
+},[])
 
   useEffect(() => {
     setMobileOpen(false);
@@ -57,39 +44,22 @@ const HeaderSection = () => {
   /* ----------------------------------------------------------
      Prevent body scroll when mobile menu is open
   ---------------------------------------------------------- */
-
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
   const isActive = (href) => {
-    if (href === "/") {
-      return pathname === "/";
-    }
-
+    if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
   const mainLinks = [
-    {
-      title: "Home",
-      href: "/",
-      icon: <FiHome />,
-    },
-    {
-      title: "Experts",
-      href: "/experts",
-      icon: <FiUsers />,
-    },
-    {
-      title: "Jobs",
-      href: "/jobs",
-      icon: <FiBriefcase />,
-    },
+    { title: "Home", href: "/", icon: <FiHome /> },
+    { title: "Experts", href: "/experts", icon: <FiUsers /> },
+    { title: "Jobs", href: "/jobs", icon: <FiBriefcase /> },
   ];
 
   const learningLinks = [
@@ -120,243 +90,23 @@ const HeaderSection = () => {
   ];
 
   return (
-    <>
-      {/* ======================================================
-          DESKTOP / MOBILE HEADER
-      ======================================================= */}
+    <header className="relative z-50 w-full border-b border-slate-200 bg-white">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* ==================================================
+            LOGO
+        =================================================== */}
+        <Link href="/" className="flex shrink-0 items-center">
+          <img
+            src="/Images/Logo.webp"
+            alt="ExpertConnect"
+            className="h-10 w-auto object-contain"
+          />
+        </Link>
 
-      <header
-        className={`fixed left-0 right-0 top-0 z-[100] transition-all duration-500 ${
-          scrolled
-            ? "px-3 pt-3 sm:px-5"
-            : "px-3 pt-3 sm:px-5 lg:px-8 lg:pt-5"
-        }`}
-      >
-        <div
-          className={`mx-auto max-w-7xl rounded-2xl border transition-all duration-500 ${
-            scrolled
-              ? "border-white/10 bg-white shadow-2xl shadow-black/20 backdrop-blur-2xl"
-              : "border-transparent bg-white/80 shadow-lg shadow-black/[0.03] backdrop-blur-xl"
-          }`}
-        >
-          <div className="flex h-[72px] items-center justify-between px-4 sm:px-6">
-            {/* ==================================================
-                LOGO
-            =================================================== */}
-
-            <Link
-              href="/"
-              className="group relative flex shrink-0 items-center"
-            >
-              <div
-                className={`absolute inset-0 rounded-full blur-2xl transition-opacity duration-500 ${
-                  scrolled
-                    ? "opacity-30 group-hover:opacity-50"
-                    : "opacity-10"
-                }`}
-                style={{ backgroundColor: PRIMARY }}
-              />
-
-              <img
-                src="/Images/Logo.webp"
-                alt="ExpertConnect"
-                className={`relative w-auto object-contain transition-all duration-500 ${
-                  scrolled ? "h-8" : "h-10"
-                }`}
-              />
-            </Link>
-
-            {/* ==================================================
-                DESKTOP NAVIGATION
-            =================================================== */}
-
-            <nav className="hidden items-center gap-1 lg:flex">
-              {mainLinks.map((item) => {
-                const active = isActive(item.href);
-
-                return (
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className={`group relative flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                      active
-                        ? "text-white"
-                        
-                        : "text-slate-600 hover:text-[#0D2B45]"
-                    }`}
-                  >
-                    {active && (
-                      <span
-                        className="absolute inset-0 -z-10 rounded-xl"
-                        style={{
-                          backgroundColor: PRIMARY,
-                        }}
-                      />
-                    )}
-
-                    <span className="transition-transform duration-300 group-hover:-translate-y-0.5">
-                      {item.icon}
-                    </span>
-
-                    {item.title}
-                  </Link>
-                );
-              })}
-
-              {/* ==================================================
-                  LEARNING DROPDOWN
-              =================================================== */}
-
-              <div className="group relative">
-                <button
-                  className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300
-                text-slate-600 hover:text-[#0D2B45]
-                  `}
-                >
-                  <FiBookOpen />
-
-                  Learning
-
-                  <FiChevronDown className="text-xs transition-transform duration-300 group-hover:rotate-180" />
-                </button>
-
-                {/* Dropdown */}
-                <div className="invisible absolute left-1/2 top-full w-[330px] -translate-x-1/2 translate-y-3 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                  <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#07143d]/95 p-2 shadow-2xl shadow-black/30 backdrop-blur-2xl">
-                    <div className="mb-1 px-3 py-2">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-300/50">
-                        Explore Learning
-                      </p>
-                    </div>
-
-                    {learningLinks.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href}
-                        className="group/item flex items-center gap-3 rounded-xl p-3 transition-colors duration-200 hover:bg-white/[0.07]"
-                      >
-                        <span
-                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-blue-200 transition-all duration-300 group-hover/item:scale-105"
-                          style={{
-                            backgroundColor: `${PRIMARY}55`,
-                          }}
-                        >
-                          {item.icon}
-                        </span>
-
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-sm font-semibold text-white">
-                            {item.title}
-                          </span>
-
-                          <span className="mt-0.5 block text-xs text-blue-100/35">
-                            {item.description}
-                          </span>
-                        </span>
-
-                        <FiArrowRight className="text-blue-300/30 transition-all duration-300 group-hover/item:translate-x-1 group-hover/item:text-blue-300" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <Link
-                href="/about"
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 text-slate-600 hover:text-[#0D2B45]`}
-              >
-                About
-              </Link>
-
-              <Link
-                href="/contact"
-                className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300  text-slate-600 hover:text-[#0D2B45]`}
-              >
-                Contact
-              </Link>
-            </nav>
-
-            {/* ==================================================
-                DESKTOP ACTIONS
-            =================================================== */}
-
-            <div className="hidden items-center gap-2 lg:flex">
-              <Link
-                href="/login"
-                className={`group flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 ${
-                  scrolled
-                    ? "text-blue-100/60 hover:bg-white/[0.06] hover:text-white"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                <FiLogIn />
-
-                Login
-              </Link>
-
-              <Link
-                href="/register"
-                className="group flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-950/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-                style={{
-                  backgroundColor: PRIMARY,
-                }}
-              >
-                Join Now
-
-                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-
-            {/* ==================================================
-                MOBILE MENU BUTTON
-            =================================================== */}
-
-            <button
-              onClick={() => setMobileOpen((prev) => !prev)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              className={`flex h-11 w-11 items-center justify-center rounded-xl border transition-all duration-300 lg:hidden ${
-                scrolled
-                  ? "border-white/10 bg-white/[0.05] text-white"
-                  : "border-slate-200 bg-white text-slate-700"
-              }`}
-            >
-              {mobileOpen ? (
-                <FiX className="text-xl" />
-              ) : (
-                <FiMenu className="text-xl" />
-              )}
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* ======================================================
-          MOBILE OVERLAY
-      ======================================================= */}
-
-      <div
-        onClick={() => setMobileOpen(false)}
-        className={`fixed inset-0 z-[90] bg-black/50 backdrop-blur-sm transition-all duration-300 lg:hidden ${
-          mobileOpen
-            ? "visible opacity-100"
-            : "invisible opacity-0"
-        }`}
-      />
-
-      {/* ======================================================
-          MOBILE MENU
-      ======================================================= */}
-
-      <div
-        className={`fixed left-3 right-3 top-[95px] z-[95] max-h-[calc(100vh-110px)] overflow-y-auto rounded-3xl border border-white/10 bg-[#07143d]/95 p-3 shadow-2xl shadow-black/30 backdrop-blur-2xl transition-all duration-500 lg:hidden ${
-          mobileOpen
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-5 opacity-0"
-        }`}
-      >
-        {/* Mobile navigation */}
-        <div className="space-y-1">
+        {/* ==================================================
+            DESKTOP NAVIGATION
+        =================================================== */}
+        <nav className="hidden items-center gap-1 lg:flex">
           {mainLinks.map((item) => {
             const active = isActive(item.href);
 
@@ -364,158 +114,242 @@ const HeaderSection = () => {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold transition-all ${
-                  active
-                    ? "text-white"
-                    : "text-blue-100/60 hover:bg-white/[0.05] hover:text-white"
+                className={`flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors duration-200 ${
+                  active ? "text-white" : "text-slate-600 hover:text-[#0D2B45]"
                 }`}
-                style={
-                  active
-                    ? {
-                        backgroundColor: `${PRIMARY}cc`,
-                      }
-                    : undefined
-                }
+                style={active ? { backgroundColor: PRIMARY } : undefined}
               >
-                <span
-                  className={`flex h-9 w-9 items-center justify-center rounded-xl ${
-                    active
-                      ? "bg-white/10"
-                      : "bg-white/[0.04]"
-                  }`}
-                >
-                  {item.icon}
-                </span>
-
+                {item.icon}
                 {item.title}
-
-                <FiArrowRight className="ml-auto text-blue-200/30" />
               </Link>
             );
           })}
 
-          {/* Learning */}
-          <button
-            onClick={() => setLearningOpen((prev) => !prev)}
-            className="flex w-full items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold text-blue-100/60 transition-all hover:bg-white/[0.05] hover:text-white"
-          >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04]">
+          {/* Learning dropdown */}
+          <div className="group relative">
+            <button className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-[#0D2B45]">
               <FiBookOpen />
-            </span>
+              Learning
+              <FiChevronDown className="text-xs transition-transform duration-200 group-hover:rotate-180" />
+            </button>
 
-            Learning
+            <div className="invisible absolute left-1/2 top-full w-[330px] -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+              <div
+                className="overflow-hidden rounded-xl border p-2 shadow-xl"
+                style={{ backgroundColor: PRIMARY, borderColor: "rgba(255,255,255,0.1)" }}
+              >
+                <div className="mb-1 px-3 py-2">
+                  <p className="text-[11px] font-semibold text-blue-200/60">
+                    Explore Learning
+                  </p>
+                </div>
 
-            <FiChevronDown
-              className={`ml-auto transition-transform duration-300 ${
-                learningOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+                {learningLinks.map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="flex items-center gap-3 rounded-lg p-3 transition-colors duration-150 hover:bg-white/[0.07]"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10 text-blue-100">
+                      {item.icon}
+                    </span>
 
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              learningOpen
-                ? "max-h-[500px] opacity-100"
-                : "max-h-0 opacity-0"
-            }`}
-          >
-            <div className="ml-4 space-y-1 border-l border-white/10 pl-3">
-              {learningLinks.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-blue-100/50 transition-colors hover:bg-white/[0.04] hover:text-white"
-                >
-                  <span className="text-blue-300">
-                    {item.icon}
-                  </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-white">
+                        {item.title}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-blue-100/40">
+                        {item.description}
+                      </span>
+                    </span>
 
-                  <span>{item.title}</span>
-                </Link>
-              ))}
+                    <FiArrowRight className="text-blue-200/30" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* About */}
           <Link
             href="/about"
-            className="flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold text-blue-100/60 transition-colors hover:bg-white/[0.05] hover:text-white"
+            className="rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-[#0D2B45]"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04]">
-              <FiUsers />
-            </span>
-
-            About Us
+            About
           </Link>
 
-          {/* Contact */}
           <Link
             href="/contact"
-            className="flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold text-blue-100/60 transition-colors hover:bg-white/[0.05] hover:text-white"
+            className="rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:text-[#0D2B45]"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04]">
-              <FiMail />
-            </span>
-
             Contact
           </Link>
-        </div>
+        </nav>
 
-        {/* Divider */}
-        <div className="my-3 h-px bg-white/[0.07]" />
+        {/* ==================================================
+            DESKTOP ACTIONS
+        =================================================== */}
+        <div className="hidden items-center gap-2 lg:flex">
+          {(!user.isLoading && user.isUser) ? 
+        
+<Link href="/profile" 
 
-        {/* Mobile actions */}
-        <div className="grid grid-cols-2 gap-2">
+className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-slate-100"
+>
+
+
+ <AiFillProfile /> 
+Profile
+
+</Link>:
           <Link
-            href="/login"
-            className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 text-sm font-semibold text-blue-100/70 transition-colors hover:bg-white/[0.08] hover:text-white"
+            href="/userlogin"
+            className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-200 hover:bg-slate-100"
           >
             <FiLogIn />
-
             Login
           </Link>
 
+
+
+
+}
           <Link
             href="/register"
-            className="flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-white"
-            style={{
-              backgroundColor: PRIMARY,
-            }}
+            className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-white transition-opacity duration-200 hover:opacity-90"
+            style={{ backgroundColor: PRIMARY }}
           >
             Join Now
-
             <FiArrowRight />
           </Link>
         </div>
 
-        {/* Mobile tagline */}
-        <div className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.025] p-4">
-          <p className="text-xs font-bold text-white">
-            Learn · Grow · Connect
-          </p>
-
-          <p className="mt-1 text-[11px] leading-5 text-blue-100/30">
-            Discover expert knowledge, opportunities and resources.
-          </p>
-        </div>
+        {/* ==================================================
+            MOBILE MENU BUTTON
+        =================================================== */}
+        <button
+          onClick={() => setMobileOpen((prev) => !prev)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-700 lg:hidden"
+        >
+          {mobileOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+        </button>
       </div>
 
       {/* ======================================================
-          SMALL ANIMATED ACCENT
+          MOBILE MENU (inline, pushes content down — not overlay)
       ======================================================= */}
+      {mobileOpen && (
+        <div className="border-t border-slate-200 bg-white lg:hidden">
+          <div className="space-y-1 px-4 py-4">
+            {mainLinks.map((item) => {
+              const active = isActive(item.href);
 
-      <div
-        className={`pointer-events-none fixed left-1/2 top-0 z-[101] h-[2px] -translate-x-1/2 transition-all duration-700 ${
-          scrolled ? "w-32 opacity-100" : "w-0 opacity-0"
-        }`}
-        style={{
-          backgroundColor: PRIMARY,
-          boxShadow: `0 0 20px ${PRIMARY}`,
-        }}
-      />
-    </>
+              return (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold ${
+                    active ? "text-white" : "text-slate-600 hover:bg-slate-50"
+                  }`}
+                  style={active ? { backgroundColor: PRIMARY } : undefined}
+                >
+                  <span className="flex text-slate-600 h-9 w-9 items-center justify-center rounded-lg bg-slate-100">
+                    {item.icon}
+                  </span>
+                  {item.title}
+                </Link>
+              );
+            })}
+
+            {/* Learning */}
+            <button
+              onClick={() => setLearningOpen((prev) => !prev)}
+              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100">
+                <FiBookOpen />
+              </span>
+              Learning
+              <FiChevronDown
+                className={`ml-auto transition-transform duration-200 ${
+                  learningOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {learningOpen && (
+              <div className="ml-4 space-y-1 border-l border-slate-200 pl-3">
+                {learningLinks.map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-600 hover:bg-slate-50"
+                  >
+                    <span style={{ color: PRIMARY }}>{item.icon}</span>
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            <Link
+              href="/about"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100">
+                <FiUsers />
+              </span>
+              About Us
+            </Link>
+
+            <Link
+              href="/contact"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100">
+                <FiMail />
+              </span>
+              Contact
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 border-t border-slate-200 px-4 py-4">
+
+
+                {(!user.isLoading && user.isUser) ? 
+        
+<Link href="/profile" 
+
+className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+>
+
+
+ <AiFillProfile /> 
+Profile
+
+</Link>:
+            <Link
+                href="/userlogin"
+              className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+            >
+              <FiLogIn />
+              Login
+            </Link>
+}
+            <Link
+              href="/register"
+              className="flex items-center justify-center gap-2 rounded-lg py-3 text-sm font-bold text-white"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              Join Now
+              <FiArrowRight />
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
 export default HeaderSection;
-

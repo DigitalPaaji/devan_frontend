@@ -17,18 +17,18 @@ export default function Home() {
   return (
    <div>
     <HeroSection />
-    <WeeklyQuestion />
-    <AboutSection />
-    <JobSection />
-    <VideoSection />
-    <TeamSection />
-    <FounderMessage />
     <Articles />
-    {/* <AboutSterilizationChampions /> */}
-    <WhiteThemeSections />
+    {/* <WeeklyQuestion /> */}
+    <AboutSection />
+    <VideoSection />
+    <JobSection />
+    <FounderMessage />
     <Events />
-    {/* <NewsYt /> */}
-    <MissionVision />
+    <AboutSterilizationChampions />
+    {/* <TeamSection /> */}
+    {/* <WhiteThemeSections /> */}
+    <NewsYt />
+    {/* <MissionVision /> */}
    </div>
   );
 }

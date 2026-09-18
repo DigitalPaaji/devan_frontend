@@ -3,6 +3,7 @@ import "./globals.css";
 import { Slide, ToastContainer } from "react-toastify";
 import Footer from "@/components/Footer";
 import HeaderSection from "@/components/HeaderSection";
+import LayoutCompo from "@/components/store/LayoutCompo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#fffbf5]">
+      <body className="min-h-full flex flex-col bg-white">
       <ToastContainer
 position="top-center"
 autoClose={2500}
@@ -38,11 +39,11 @@ draggable
 pauseOnHover
 theme="light"
 transition={Slide}
-/>
+/><LayoutCompo>
         <HeaderSection />
         {children}
         <Footer />
-        
+        </LayoutCompo>
         </body>
     </html>
   );
