@@ -11,28 +11,25 @@ import {
   FiClock,
   FiExternalLink,
   FiHelpCircle,
-  FiStar,
   FiUser,
-  FiAward,
 } from "react-icons/fi";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+
+/* Brand tokens — keep every accent tied to one palette */
+const BRAND = "#0D2B45";
 
 const WeeklyQuestion = () => {
   const [questionData, setQuestionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState(null);
-
+  const user = useSelector((state) => state.user);
 
   const fetchQuestion = async () => {
     try {
       setLoading(true);
-
-      const response = await axios.get(
-        `${base_url}/weeklyquestion/get-all`
-      );
-
+      const response = await axios.get(`${base_url}/weeklyquestion/get-all`);
       const data = response.data;
-
       if (data.success) {
         setQuestionData(data);
       }
@@ -48,10 +45,6 @@ const WeeklyQuestion = () => {
     fetchQuestion();
   }, []);
 
-  /* ==========================================================
-     COUNTDOWN
-  ========================================================== */
-
   useEffect(() => {
     if (!questionData?.question?.submissionDeadline) return;
 
@@ -63,58 +56,50 @@ const WeeklyQuestion = () => {
       const difference = deadline - Date.now();
 
       if (difference <= 0) {
-        setTimeLeft({
-          days: 0,
-          hours: 0,
-          minutes: 0,
-          seconds: 0,
-          expired: true,
-        });
-
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, expired: true });
         return;
       }
 
       setTimeLeft({
-        days: Math.floor(
-          difference / (1000 * 60 * 60 * 24)
-        ),
-
-        hours: Math.floor(
-          (difference / (1000 * 60 * 60)) % 24
-        ),
-
-        minutes: Math.floor(
-          (difference / (1000 * 60)) % 60
-        ),
-
-        seconds: Math.floor(
-          (difference / 1000) % 60
-        ),
-
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / (1000 * 60)) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
         expired: false,
       });
     };
 
     updateTimer();
-
     const interval = setInterval(updateTimer, 1000);
-
     return () => clearInterval(interval);
   }, [questionData]);
 
   /* ==========================================================
      LOADING
   ========================================================== */
-
   if (loading) {
     return (
       <section className="container mx-auto w-full px-4 py-8">
-        <div className="grid animate-pulse grid-cols-1 gap-5 lg:grid-cols-3">
-
-          <div className="h-[430px] rounded-3xl bg-slate-100 lg:col-span-2" />
-
-          <div className="h-[430px] rounded-3xl bg-slate-100" />
-
+        <div className="mx-auto max-w-4xl animate-pulse">
+          <div className="mb-6 h-4 w-40 rounded-full bg-slate-100" />
+          <div className="overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-sm">
+            <div className="h-1.5 w-full bg-slate-100" />
+            <div className="space-y-6 p-6 sm:p-8">
+              <div className="flex items-center gap-3">
+                <div className="h-14 w-14 rounded-2xl bg-slate-100" />
+                <div className="space-y-2">
+                  <div className="h-3 w-24 rounded bg-slate-100" />
+                  <div className="h-4 w-36 rounded bg-slate-100" />
+                </div>
+              </div>
+              <div className="h-px w-full bg-slate-100" />
+              <div className="space-y-3">
+                <div className="h-6 w-5/6 rounded bg-slate-100" />
+                <div className="h-6 w-2/3 rounded bg-slate-100" />
+              </div>
+              <div className="h-40 w-full rounded-2xl bg-slate-100" />
+            </div>
+          </div>
         </div>
       </section>
     );
@@ -123,32 +108,25 @@ const WeeklyQuestion = () => {
   /* ==========================================================
      NO QUESTION
   ========================================================== */
-
   if (!questionData?.question) {
     return (
       <section className="container mx-auto w-full px-4 py-8">
-
-        <div className="flex min-h-[350px] flex-col items-center justify-center rounded-3xl border border-dashed border-slate-200 bg-slate-50 px-6 text-center">
-
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm">
-
-            <FiHelpCircle
-              className="text-3xl text-slate-400"
-            />
-
+        <div className="relative mx-auto flex min-h-[380px] max-w-2xl flex-col items-center justify-center overflow-hidden rounded-[28px] border border-slate-100 bg-white px-6 text-center shadow-sm">
+          <div
+            className="pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full opacity-[0.06] blur-3xl"
+            style={{ background: BRAND }}
+          />
+          <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 ring-1 ring-slate-100">
+            <FiHelpCircle className="text-2xl text-slate-400" />
           </div>
-
-          <h2 className="text-xl font-bold text-slate-800">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900">
             No Weekly Question
           </h2>
-
-          <p className="mt-2 max-w-md text-sm leading-6 text-slate-500">
-            There is no active weekly question available
-            right now. Check back soon for the next challenge.
+          <p className="mt-2 max-w-sm text-sm leading-6 text-slate-500">
+            There is no active weekly question available right now. Check
+            back soon for the next challenge.
           </p>
-
         </div>
-
       </section>
     );
   }
@@ -156,533 +134,279 @@ const WeeklyQuestion = () => {
   /* ==========================================================
      DATA
   ========================================================== */
-
   const { question, hasAnswered } = questionData;
-
   const expert = question?.expertId;
+  const deadline = new Date(question.submissionDeadline);
+  const startDate = new Date(question.startDate);
+  const isDeadlinePassed = deadline.getTime() < Date.now();
 
-  const deadline = new Date(
-    question.submissionDeadline
-  );
-
-  const startDate = new Date(
-    question.startDate
-  );
-
-  const isDeadlinePassed =
-    deadline.getTime() < Date.now();
-
-  const formatDate = (date) => {
-    return date.toLocaleDateString("en-IN", {
+  const formatDate = (date) =>
+    date.toLocaleDateString("en-IN", {
       day: "numeric",
       month: "short",
       year: "numeric",
     });
-  };
+
+  const timeUnits = timeLeft
+    ? [
+        { label: "Days", value: timeLeft.days },
+        { label: "Hrs", value: timeLeft.hours },
+        { label: "Min", value: timeLeft.minutes },
+        { label: "Sec", value: timeLeft.seconds },
+      ]
+    : [];
 
   /* ==========================================================
      UI
   ========================================================== */
-
   return (
-    <section className="container mx-auto w-full px-4 py-6 sm:py-8">
-
-      {/* ======================================================
-          HEADER
-      ====================================================== */}
-
-      <div className="mb-5">
-
-        <div className="mb-2 flex items-center gap-2">
-
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45] text-white">
-            <FiHelpCircle size={16} />
-          </span>
-
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#0D2B45]">
-            Weekly Challenge
-          </span>
-
+    <section className="container mx-auto w-full px-4 py-6 sm:py-10">
+      <div className="mx-auto ">
+        {/* ==================================================
+            HEADER
+        ================================================== */}
+        <div className="mb-6 flex flex-col items-start gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="mb-2 flex items-center gap-2">
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-lg text-white shadow-sm"
+                style={{ background: BRAND }}
+              >
+                <FiHelpCircle size={14} />
+              </span>
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.2em]"
+                style={{ color: BRAND }}
+              >
+                Weekly Challenge
+              </span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              Question of the Week
+            </h1>
+            <p className="mt-1 text-sm text-slate-500">
+              Share your knowledge and learn from our experts.
+            </p>
+          </div>
         </div>
 
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-          Question of the Week
-        </h1>
+      
+        <div className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_18px_40px_-24px_rgba(15,23,42,0.18)] transition-shadow duration-300 hover:shadow-[0_1px_2px_rgba(15,23,42,0.06),0_28px_60px_-24px_rgba(15,23,42,0.24)]">
+          {/* decorative glow */}
+          <div
+            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-[0.05] blur-3xl"
+            style={{ background: BRAND }}
+          />
 
-        <p className="mt-1 text-sm text-slate-500">
-          Share your knowledge and learn from our experts.
-        </p>
+          {/* Accent bar */}
+          <div
+            className="h-1.5 w-full"
+            style={{
+              background: `linear-gradient(90deg, ${BRAND} 0%, #3a5a7a 100%)`,
+            }}
+          />
 
-      </div>
-
-      {/* ======================================================
-          MAIN GRID
-      ====================================================== */}
-
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-
-        {/* ====================================================
-            QUESTION CARD
-        ==================================================== */}
-
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg lg:col-span-2">
-
-          {/* Accent */}
-
-          <div className="h-1 w-full bg-[#0D2B45]" />
-
-          <div className="p-5 sm:p-6 lg:p-7">
-
-            {/* =================================================
-                EXPERT
-            ================================================= */}
-
+          <div className="relative p-5 sm:p-8 lg:p-9">
+            {/* ============================================
+                EXPERT + STATUS
+            ============================================ */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
-              {/* Expert Profile */}
-
-              <div className="flex items-center gap-3">
-
+              <div className="flex items-center gap-3.5">
                 <div className="relative shrink-0">
-
                   {expert?.image ? (
                     <img
                       src={`${img_url}${expert.image}`}
-                      alt={
-                        expert?.fullname ||
-                        "Expert"
-                      }
-                      className="h-14 w-14 rounded-2xl object-cover ring-4 ring-[#0D2B45]/10"
+                      alt={expert?.fullname || "Expert"}
+                      className="h-14 w-14 rounded-2xl object-cover shadow-sm"
+                      style={{ boxShadow: `0 0 0 4px rgba(13,43,69,0.08)` }}
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0D2B45]/10">
-                      <FiUser
-                        className="text-xl text-[#0D2B45]"
-                      />
+                    <div
+                      className="flex h-14 w-14 items-center justify-center rounded-2xl"
+                      style={{ background: "rgba(13,43,69,0.08)" }}
+                    >
+                      <FiUser className="text-xl" style={{ color: BRAND }} />
                     </div>
                   )}
-
                   <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-white">
-
                     <FiCheckCircle size={11} />
-
                   </span>
-
                 </div>
 
-                {/* Expert Details */}
-
                 <div className="min-w-0">
-
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
                     Question by
                   </p>
-
                   <h3 className="truncate text-base font-bold text-slate-800">
                     {expert?.fullname}
                   </h3>
-
-                  <div className="flex flex-wrap gap-1.5 text-xs text-slate-500">
-
-                    {expert?.designation && (
-                      <span>
-                        {expert.designation}
-                      </span>
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+                    {expert?.designation && <span>{expert.designation}</span>}
+                    {expert?.designation && expert?.qualification && (
+                      <span className="text-slate-300">•</span>
                     )}
-
-                    {expert?.designation &&
-                      expert?.qualification && (
-                        <span className="text-slate-300">
-                          •
-                        </span>
-                      )}
-
                     {expert?.qualification && (
-                      <span>
-                        {expert.qualification}
-                      </span>
+                      <span>{expert.qualification}</span>
                     )}
-
                   </div>
-
                 </div>
-
               </div>
 
-              {/* Status */}
-
               {hasAnswered ? (
-
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600">
-
+                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-600 ring-1 ring-emerald-100">
                   <FiCheckCircle />
-
                   Answered
-
                 </span>
-
               ) : isDeadlinePassed ? (
-
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-500">
-
+                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-500 ring-1 ring-red-100">
                   <FiClock />
-
                   Closed
-
                 </span>
-
               ) : (
-
-                <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#0D2B45]/10 px-3 py-1.5 text-xs font-semibold text-[#0D2B45]">
-
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#0D2B45]" />
-
+                <span
+                  className="inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold ring-1"
+                  style={{
+                    background: "rgba(13,43,69,0.08)",
+                    color: BRAND,
+                    borderColor: "rgba(13,43,69,0.15)",
+                  }}
+                >
+                  <span
+                    className="h-1.5 w-1.5 animate-pulse rounded-full"
+                    style={{ background: BRAND }}
+                  />
                   Active
-
                 </span>
-
               )}
-
             </div>
 
             {/* Divider */}
+            <div className="my-6 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-            <div className="my-5 h-px bg-slate-100" />
-
-            {/* =================================================
-                QUESTION
-            ================================================= */}
-
+           
             <div>
-
-              <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[#0D2B45]">
-
+              <div
+                className="mb-2.5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em]"
+                style={{ color: BRAND }}
+              >
                 <FiHelpCircle size={13} />
-
                 Weekly Question
-
               </div>
-
-              <h2 className="max-w-3xl text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
+              <h2 className="max-w-3xl text-xl font-bold leading-snug tracking-tight text-slate-900 sm:text-2xl lg:text-[28px]">
                 {question?.question}
               </h2>
-
             </div>
 
-            {/* =================================================
-                REFERENCE
-            ================================================= */}
-
+            
             {question?.referenceImages && (
-
               <Link
                 href={`${img_url}${question.referenceImages}`}
                 target="_blank"
-                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-[#0D2B45]/20 bg-[#0D2B45]/5 px-3 py-2 text-xs font-semibold text-[#8b6dd9] transition hover:bg-[#0D2B45]/10"
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition hover:-translate-y-0.5"
+                style={{
+                  borderColor: "rgba(13,43,69,0.18)",
+                  background: "rgba(13,43,69,0.05)",
+                  color: BRAND,
+                }}
               >
-
                 <FiExternalLink size={14} />
-
                 View Question Reference
-
               </Link>
-
             )}
 
-            {/* =================================================
-                DATES
-            ================================================= */}
-
-            <div className="mt-5 grid grid-cols-2 gap-3">
-
-              {/* Start Date */}
-
-              <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 p-3">
-
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#0D2B45] shadow-sm">
-
+            
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50/70 p-3.5">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm"
+                  style={{ color: BRAND }}
+                >
                   <FiCalendar size={16} />
-
                 </div>
-
                 <div className="min-w-0">
-
-                  <p className="text-[10px] text-slate-400">
-                    Started
-                  </p>
-
+                  <p className="text-[10px] text-slate-400">Started</p>
                   <p className="truncate text-xs font-semibold text-slate-700">
                     {formatDate(startDate)}
                   </p>
-
                 </div>
-
               </div>
 
-              {/* Deadline */}
-
-              <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50 p-3">
-
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-[#0D2B45] shadow-sm">
-
+              <div className="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50/70 p-3.5">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm"
+                  style={{ color: BRAND }}
+                >
                   <FiClock size={16} />
-
                 </div>
-
                 <div className="min-w-0">
-
-                  <p className="text-[10px] text-slate-400">
-                    Deadline
-                  </p>
-
+                  <p className="text-[10px] text-slate-400">Deadline</p>
                   <p
                     className={`truncate text-xs font-semibold ${
-                      isDeadlinePassed
-                        ? "text-red-500"
-                        : "text-slate-700"
+                      isDeadlinePassed ? "text-red-500" : "text-slate-700"
                     }`}
                   >
                     {formatDate(deadline)}
                   </p>
-
                 </div>
-
               </div>
-
             </div>
 
-            {/* =================================================
+            {/* ============================================
                 TIMER + SUBMIT
-            ================================================= */}
-
-            <div className="mt-5 flex flex-col gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
-
-              {/* TIMER */}
-
-              {!isDeadlinePassed &&
-                timeLeft && (
-
-                  <div className="flex items-center gap-2">
-
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0D2B45]/10 text-[#0D2B45]">
-
-                      <FiClock size={14} />
-
-                    </div>
-
-                    <div>
-
-                      <p className="text-[9px] font-medium uppercase tracking-wider text-slate-400">
-                        Time left
-                      </p>
-
-                      <div className="flex items-center gap-1 text-xs font-bold text-slate-700">
-
-                        <span>
-                          {String(
-                            timeLeft.days
-                          ).padStart(2, "0")}
-                          d
+            ============================================ */}
+            <div className="mt-6 flex flex-col gap-5 border-t border-slate-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              {!isDeadlinePassed && timeLeft && (
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  {timeUnits.map((unit, i) => (
+                    <React.Fragment key={unit.label}>
+                      <div className="flex w-14 flex-col items-center rounded-xl border border-slate-100 bg-slate-50/70 py-2">
+                        <span
+                          className="text-base font-bold tabular-nums leading-none"
+                          style={{ color: BRAND }}
+                        >
+                          {String(unit.value).padStart(2, "0")}
                         </span>
-
-                        <span className="text-slate-300">
-                          :
+                        <span className="mt-1 text-[9px] font-medium uppercase tracking-wider text-slate-400">
+                          {unit.label}
                         </span>
-
-                        <span>
-                          {String(
-                            timeLeft.hours
-                          ).padStart(2, "0")}
-                          h
-                        </span>
-
-                        <span className="text-slate-300">
-                          :
-                        </span>
-
-                        <span>
-                          {String(
-                            timeLeft.minutes
-                          ).padStart(2, "0")}
-                          m
-                        </span>
-
-                        <span className="text-slate-300">
-                          :
-                        </span>
-
-                        <span className="text-[#0D2B45]">
-                          {String(
-                            timeLeft.seconds
-                          ).padStart(2, "0")}
-                          s
-                        </span>
-
                       </div>
+                      {i < timeUnits.length - 1 && (
+                        <span className="text-slate-300">:</span>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+              )}
 
-                    </div>
-
-                  </div>
-
-                )}
-
-              {/* SUBMIT BUTTON */}
-
-              {!hasAnswered &&
-              !isDeadlinePassed ? (
-
+              {!hasAnswered && !isDeadlinePassed ? (
                 <Link
-                  href={`/weekly-question/${question._id}`}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0D2B45] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#9676e8] hover:shadow-md sm:w-auto"
+                  href={user.isUser ? "/weekly-question" : "/login"}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-xs font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:w-auto"
+                  style={{ background: BRAND }}
                 >
-
                   Submit Your Answer
-
                   <FiArrowRight
                     size={14}
                     className="transition-transform duration-300 group-hover:translate-x-1"
                   />
-
                 </Link>
-
               ) : hasAnswered ? (
-
-                <div className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-50 px-5 py-2.5 text-xs font-semibold text-emerald-600">
-
+                <div className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-50 px-6 py-3 text-xs font-semibold text-emerald-600 ring-1 ring-emerald-100">
                   <FiCheckCircle size={14} />
-
                   Answer Submitted
-
                 </div>
-
               ) : (
-
-                <div className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 px-5 py-2.5 text-xs font-semibold text-slate-400">
-
+                <div className="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 px-6 py-3 text-xs font-semibold text-slate-400">
                   <FiClock size={14} />
-
                   Challenge Closed
-
                 </div>
-
               )}
-
             </div>
-
           </div>
         </div>
-
-        {/* ====================================================
-            CHAMPION CARD
-        ==================================================== */}
-
-        <div className="relative overflow-hidden rounded-3xl bg-[#0D2B45] text-white shadow-sm">
-
-          {/* Decorative circles */}
-
-          <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full border border-white/15" />
-
-          <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full border border-white/15" />
-
-          <div className="relative p-6">
-
-            {/* Header */}
-
-            <div className="flex items-center justify-between">
-
-              <div>
-
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">
-                  Recognition
-                </p>
-
-                <h2 className="mt-1 text-xl font-bold">
-                  Champion
-                </h2>
-
-              </div>
-
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-
-                <FiAward size={20} />
-
-              </div>
-
-            </div>
-
-            {/* Champion */}
-
-            <div className="py-9 text-center">
-
-              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white/10">
-
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0D2B45] shadow-lg">
-
-                  <FiAward className="text-2xl" />
-
-                </div>
-
-              </div>
-
-              <div className="mx-auto mb-3 flex w-fit items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold">
-
-                <FiStar
-                  className="fill-current"
-                  size={12}
-                />
-
-                Weekly Champion
-
-              </div>
-
-              <h3 className="text-xl font-bold">
-                Be the next Champion
-              </h3>
-
-              <p className="mx-auto mt-2 max-w-xs text-xs leading-5 text-white/70">
-                Give your best answer and get recognized
-                as this week's top contributor.
-              </p>
-
-            </div>
-
-            {/* Bottom */}
-
-            <div className="border-t border-white/15 pt-4">
-
-              <div className="flex items-center gap-3">
-
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
-
-                  <FiAward size={16} />
-
-                </div>
-
-                <div>
-
-                  <p className="text-[10px] text-white/50">
-                    Your goal
-                  </p>
-
-                  <p className="text-xs font-semibold">
-                    Answer • Learn • Win
-                  </p>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
       </div>
-
     </section>
   );
 };
 
 export default WeeklyQuestion;
-

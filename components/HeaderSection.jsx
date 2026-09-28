@@ -21,6 +21,7 @@ import { FaNewspaper } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./store/userSlice";
 import { AiFillProfile } from "react-icons/ai";
+import { MdEventNote } from "react-icons/md";
 
 const PRIMARY = "#0D2B45";
 
@@ -58,7 +59,7 @@ dispatch(getUser())
 
   const mainLinks = [
     { title: "Home", href: "/", icon: <FiHome /> },
-    { title: "Experts", href: "/experts", icon: <FiUsers /> },
+    { title: "Events", href: "/events", icon: <MdEventNote  /> },
     { title: "Jobs", href: "/jobs", icon: <FiBriefcase /> },
   ];
 
@@ -97,7 +98,7 @@ dispatch(getUser())
         =================================================== */}
         <Link href="/" className="flex shrink-0 items-center">
           <img
-            src="/Images/Logo.webp"
+            src="/Images/logo3.webp"
             alt="ExpertConnect"
             className="h-10 w-auto object-contain"
           />

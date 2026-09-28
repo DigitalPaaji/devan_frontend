@@ -51,6 +51,22 @@ const userSlice = createSlice({
     adduserData:(state,action)=>{
    
       state.info= action.payload
+    },
+    toggleArticles:(state,action)=>{
+     const isSaved =  state.info.savedArticles.some(item=>item.toString() === action.payload.toString())
+
+if (isSaved) {
+    
+      state.info.savedArticles = state.info.savedArticles.filter(
+        (item) =>
+          item.toString() !== action.payload.toString()
+      );
+    } else {
+      
+      state.info.savedArticles.push(action.payload.toString());
+    }
+
+
     }
   },
 
@@ -87,6 +103,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logoutUser,adduserData } = userSlice.actions;
+export const { logoutUser,adduserData,toggleArticles } = userSlice.actions;
 
 export default userSlice.reducer;

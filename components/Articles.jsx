@@ -13,6 +13,8 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Link from "next/link";
 import ArticleCard from "./ArticleCard";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleArticles } from "./store/userSlice";
 
 /* =========================================================
    FONTS + BASE STYLES (inject once)
@@ -52,6 +54,8 @@ const ArticleStyles = () => (
 );
 
 const Articles = () => {
+   const user = useSelector(state=>state.user)
+   const dispatch = useDispatch()
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -126,9 +130,27 @@ const Articles = () => {
     );
   }
 
-  /* ==========================================================
-     MAIN
-  ========================================================== */
+ 
+
+
+const handelToggle = async(articleid)=>{
+try {
+  const response = await axios.get(`${base_url}/auth/article/${articleid}`,{withCredentials:true})
+  const data = await response.data;
+  if(data.success){
+
+dispatch(toggleArticles(articleid))
+    
+  }else{
+    toast.error(data.message)
+  }
+  
+} catch (error) {
+  toast.error(error?.response?.data?.message)
+  
+}
+}
+
   return (
     <section className="w-full bg-[#F7F5F0] py-16 sm:py-24">
       <ArticleStyles />
@@ -183,7 +205,7 @@ const Articles = () => {
                   className="articles-fade-in"
                   style={{ animationDelay: `${i * 70}ms` }}
                 >
-                  <ArticleCard article={article} />
+                  <ArticleCard article={article} user={user} handelToggle={handelToggle} />
                 </div>
               </SwiperSlide>
             ))}

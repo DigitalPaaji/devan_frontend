@@ -2,13 +2,21 @@ import React from 'react'
 import { img_url } from './utils';
 import { FiArrowUpRight, FiBookOpen, FiUser } from 'react-icons/fi';
 import Link from 'next/link';
+import { RiFlag2Line } from 'react-icons/ri';
+import { HiFlag } from 'react-icons/hi';
 
-const ArticleCard = ({article}) => {
+const ArticleCard = ({article,user=null,handelToggle}) => {
+console.log(user)
 
     return (
     <article className="group h-full border border-[#DEDACE] bg-[#FCFBF8] transition-colors duration-300 hover:border-[#2F6F5C]">
-      {/* Thumbnail */}
+   
+
+
       <div className="relative aspect-[4/3] overflow-hidden border-b border-[#DEDACE] bg-[#EFECE3]">
+
+    {user.isUser  &&<HiFlag   onClick={()=>handelToggle(article._id)} className={`absolute -right-1 -top-1 z-10 rotate-90 text-2xl cursor-pointer ${user.info.savedArticles.includes(article._id)?"text-red-600":""}`} />}
+
         {article?.thumbnail ? (
           <img
             src={`${img_url}${article.thumbnail}`}

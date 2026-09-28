@@ -42,8 +42,7 @@ const Footer = () => {
   const resourceLinks = [
     ["Privacy Policy", "/privacy-policy"],
     ["Terms & Conditions", "/terms"],
-    ["Cookie Policy", "/cookies"],
-    ["Help Center", "/help"],
+  
   ];
 
   const socials = [

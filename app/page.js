@@ -8,6 +8,7 @@ import HeroSection from "@/components/HeroSection";
 import JobSection from "@/components/JobSection";
 import MissionVision from "@/components/MissionVision";
 import NewsYt from "@/components/NewsYt";
+import OurChampions from "@/components/OurChampions";
 import TeamSection from "@/components/Team";
 import VideoSection from "@/components/VideoSection";
 import WeeklyQuestion from "@/components/WeeklyQuestion";
@@ -18,7 +19,8 @@ export default function Home() {
    <div>
     <HeroSection />
     <Articles />
-    {/* <WeeklyQuestion /> */}
+    <WeeklyQuestion />
+    <OurChampions /> 
     <AboutSection />
     <VideoSection />
     <JobSection />
